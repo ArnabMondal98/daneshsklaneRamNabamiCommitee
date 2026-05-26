@@ -1,0 +1,107 @@
+
+{
+  "entities": {
+    "NewsItem": {
+      "title": "News Item",
+      "description": "A news article or update for the community.",
+      "type": "object",
+      "properties": {
+        "headline_bn": { "type": "string" },
+        "headline_en": { "type": "string" },
+        "summary_bn": { "type": "string" },
+        "summary_en": { "type": "string" },
+        "facebookLink": { "type": "string", "format": "uri" },
+        "category_bn": { "type": "string" },
+        "category_en": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "isPublished": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["headline_bn", "createdAt"]
+    },
+    "Event": {
+      "title": "Community Event",
+      "description": "A scheduled community event or celebration.",
+      "type": "object",
+      "properties": {
+        "title_bn": { "type": "string" },
+        "title_en": { "type": "string" },
+        "description_bn": { "type": "string" },
+        "description_en": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "time": { "type": "string" },
+        "location_bn": { "type": "string" },
+        "location_en": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "gallery": { "type": "array", "items": { "type": "string" } },
+        "video": { "type": "string" },
+        "status": { "type": "string", "enum": ["upcoming", "completed"] },
+        "featured": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title_bn", "date", "status"]
+    },
+    "Work": {
+      "title": "Community Work",
+      "description": "A completed public service project or development work.",
+      "type": "object",
+      "properties": {
+        "title_bn": { "type": "string" },
+        "title_en": { "type": "string" },
+        "description_bn": { "type": "string" },
+        "description_en": { "type": "string" },
+        "location_bn": { "type": "string" },
+        "location_en": { "type": "string" },
+        "image": { "type": "string" },
+        "gallery": { "type": "array", "items": { "type": "string" } },
+        "video": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "completed"] },
+        "featured": { "type": "boolean" },
+        "date": { "type": "string", "format": "date" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title_bn", "status"]
+    },
+    "Member": {
+      "title": "Committee Member",
+      "description": "A member of the committee directory.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "designation": { "type": "string" },
+        "recognition": { "type": "string" },
+        "memberYear": { "type": "number" },
+        "photo": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "designation", "phone"]
+    }
+  },
+  "auth": {
+    "providers": ["google.com"]
+  },
+  "firestore": {
+    "/news": {
+      "schema": "#/entities/NewsItem",
+      "description": "Collection of news articles and updates."
+    },
+    "/events": {
+      "schema": "#/entities/Event",
+      "description": "Collection of upcoming and past community events."
+    },
+    "/works": {
+      "schema": "#/entities/Work",
+      "description": "Collection of community development projects."
+    },
+    "/members": {
+      "schema": "#/entities/Member",
+      "description": "Collection of committee members."
+    }
+  }
+}
